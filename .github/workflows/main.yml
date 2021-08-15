@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Build an image from Dockerfile
         run: |
-          DOCKER_BUILDKIT=1 docker image build . -f app/Dcokerfile --tag ${{ secrets.GITHUBUSER }}/gitops-go-app:latest
+          DOCKER_BUILDKIT=1 docker image build . -f app/Dockerfile --tag ${{ secrets.GITHUBUSER }}/gitops-go-app:latest
       - name: Run Trivy
         uses: aquasecurity/trivy-action@master
         with: 
