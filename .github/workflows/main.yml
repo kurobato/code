@@ -37,8 +37,8 @@ jobs:
           echo ${{ secrets.GITHUBTOKEN }} > token.txt
           gh auth login --with-token < token.txt
           git config --local user.email ${{ secrets.EMAIL }}
-          git config --local user.name ${{ secret.GITHUBUSER }}
-          git clone https://github.com/${{ secret.GITHUBUSER }}/config.git
+          git config --local user.name ${{ secrets.GITHUBUSER }}
+          git clone https://github.com/${{ secrets.GITHUBUSER }}/config.git
           cd config/manifest
           yq write -i 'app.yaml' 'metadata.name' ${{ github.run_number }}
           git add build_number
