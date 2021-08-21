@@ -41,7 +41,7 @@ jobs:
           git config --global user.name ${{ secrets.GITHUBUSER }}
           git clone https://github.com/${{ secrets.GITHUBUSER }}/config.git
           cd config/manifest
-          yq e '.metadata.name = ${{ github.run_number }}' -i app.yaml
+          yq e '.metadata.name = '${{ github.run_number }}'' -i app.yaml
           git add app.yaml
           git commit -m ${{ github.run_number }} -a
           git push origin main
