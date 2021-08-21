@@ -31,7 +31,7 @@ jobs:
         run: |
           docker login docker.io --username ${{ secrets.DOCKERUSER }} --password ${{ secrets.DOCKERPASSWORD }}
           docker image push ${{ secrets.DOCKERUSER }}/gitops-go-app:latest
-
+      #Kubernetesマニフェストの更新
       - name:
         run: |
           echo ${{ secrets.GITHUBTOKEN }} > token.txt
@@ -40,6 +40,7 @@ jobs:
           git config --local user.name ${{ secrets.GITHUBUSER }}
           git clone https://github.com/${{ secrets.GITHUBUSER }}/config.git
           cd config/manifest
+          wget https://github.com/mikefarah/yq/releases/download/${VERSION}/${BINARY} -O ./yq && chmod +x ./yq
           yq write -i 'app.yaml' 'metadata.name' ${{ github.run_number }}
           git add build_number
           git commit -m ${{ github.run_number }} -a
