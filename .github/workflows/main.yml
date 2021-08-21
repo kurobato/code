@@ -31,3 +31,20 @@ jobs:
         run: |
           docker login docker.io --username ${{ secrets.DOCKERUSER }} --password ${{ secrets.DOCKERPASSWORD }}
           docker image push ${{ secrets.DOCKERUSER }}/gitops-go-app:latest
+
+      - name:
+        run: |
+          echo ${{ secrets.GITHUBTOKEN }} > token.txt
+          gh auth login --with-token < token.txt
+          git config --local user.email ${{ secrets.EMAIL }}
+          git config --local user.name ${{ secret.GITHUBUSER }}
+          git clone https://github.com/${{ secret.GITHUBUSER }}/config.git
+          cd config/manifest
+          yq write -i 'app.yaml' 'metadata.name' ${{ github.run_number }}
+          git add build_number
+          git commit -m ${{ github.run_number }} -a
+          git push origin master
+        
+
+
+
