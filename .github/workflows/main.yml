@@ -34,8 +34,8 @@ jobs:
       #Kubernetesマニフェストの更新
       - name:
         run: |
-          echo ${{ secrets.GITHUBTOKEN }} > token.txt
-          gh auth login --with-token < token.txt
+          #echo ${{ secrets.GITHUBTOKEN }} > token.txt
+          #gh auth login --with-token < token.txt
           echo -e "machine github.com\nlogin ${{ secrets.GITHUBUSER }}\npassword ${{ secrets.GITHUBTOKEN }}" > ~/.netrc
           git config --global user.email ${{ secrets.EMAIL }}
           git config --global user.name ${{ secrets.GITHUBUSER }}
