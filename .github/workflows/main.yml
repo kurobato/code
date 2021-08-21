@@ -44,4 +44,4 @@ jobs:
           yq e '.metadata.name = ${{ github.run_number }}' -i app.yaml
           git add app.yaml
           git commit -m ${{ github.run_number }} -a
-          git push https://[pushしたいユーザ名] main
+          git push origin master
